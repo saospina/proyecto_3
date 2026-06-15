@@ -1,0 +1,27 @@
+{% macro priority_badge(priority) -%}
+  {% set p = priority|string %}
+  {% set classes = {
+    'low': 'bg-slate-200 text-slate-700',
+    'medium': 'bg-amber-100 text-amber-800',
+    'high': 'bg-orange-100 text-orange-800',
+    'blocking': 'bg-red-100 text-red-800',
+  } %}
+  <span class="inline-block text-xs font-semibold rounded-full px-2 py-1 uppercase tracking-wide
+               {{ classes.get(p, 'bg-slate-200 text-slate-700') }}">
+    {{ p }}
+  </span>
+{%- endmacro %}
+
+{% macro status_badge(status) -%}
+  {% set s = status|string %}
+  {% set classes = {
+    'pending': 'bg-slate-200 text-slate-700',
+    'in_progress': 'bg-blue-100 text-blue-800',
+    'under_review': 'bg-purple-100 text-purple-800',
+    'completed': 'bg-emerald-100 text-emerald-800',
+  } %}
+  <span class="inline-block text-xs font-semibold rounded-full px-2 py-1 uppercase tracking-wide
+               {{ classes.get(s, 'bg-slate-200 text-slate-700') }}">
+    {{ s.replace('_', ' ') }}
+  </span>
+{%- endmacro %}

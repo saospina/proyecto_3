@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block title %}AI Backlog{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800">
+    <header class="bg-slate-900 text-white">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="{{ url_for('user_stories.list_user_stories') }}" class="text-xl font-semibold">
+          AI Backlog
+        </a>
+        <nav class="text-sm text-slate-300">
+          <span>Flask + SQLAlchemy + OpenAI structured outputs</span>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="space-y-2 mb-6">
+            {% for category, message in messages %}
+              <div class="rounded-lg px-4 py-3 text-sm
+                {% if category == 'error' %}bg-red-100 text-red-800 border border-red-200
+                {% else %}bg-emerald-100 text-emerald-800 border border-emerald-200{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
