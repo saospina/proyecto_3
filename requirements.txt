@@ -6,3 +6,4 @@ pydantic==2.9.2
 openai==1.54.4
 python-dotenv==1.0.1
 flask-swagger-ui==4.11.1
+gunicorn
