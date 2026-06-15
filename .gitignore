@@ -67,8 +67,8 @@ dmypy.json
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# pyenv
-.python-version
+# pyenv (keep .python-version tracked — Render reads it for deploys)
+# .python-version
 
 # Databases
 *.db
