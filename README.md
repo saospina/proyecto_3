@@ -118,8 +118,10 @@ The app is a vanilla WSGI Flask app, so any platform that runs Python or Docker 
 2. In the [Render dashboard](https://dashboard.render.com), create a **PostgreSQL** database and copy its *Internal Database URL*.
 3. Create a new **Web Service** from the GitHub repo with:
    - **Runtime:** Python 3
-   - **Build command:** `pip install -r requirements.txt && pip install gunicorn`
+   - **Build command:** `pip install -r requirements.txt`
    - **Start command:** `gunicorn run:app --bind 0.0.0.0:$PORT --workers 2`
+
+   Render defaults new services to Python 3.14, but `pydantic-core` (a dependency of this project) has no pre-built wheel for 3.14 yet, so pip tries to compile it with Rust and the build fails. The repo includes a `.python-version` file (`3.12`) so Render installs a supported runtime with binary wheels. Alternatively, set the `PYTHON_VERSION` environment variable to a full version such as `3.12.11`.
    - **Environment variables:**
      - `DATABASE_URL` → the internal URL from step 2
      - `OPENAI_API_KEY` → your key
